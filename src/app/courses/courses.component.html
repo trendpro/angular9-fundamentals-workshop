@@ -35,7 +35,7 @@
                     <ng-template #noCourse>Select course</ng-template>
                 </mat-card-title>
             </mat-card-header>
-            <form #form="ngForm" (submit)="saveCourse()">
+            <form #form="ngForm" (submit)="saveCourse(currentCourse)">
               <mat-card-content>
               <!-- COURSE FORM -->
               <mat-form-field>

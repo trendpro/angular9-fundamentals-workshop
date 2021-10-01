@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CoursesService } from '../shared/services/courses.service';
 
 @Component({
   selector: 'app-courses',
@@ -6,31 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent implements OnInit {
-  courses = [
-    {
-      id: 1,
-      title: 'Angular 9 Fundamentals',
-      description: 'Learn the fundamentals of Angular 9',
-      percentComplete: 26,
-      favorite: true
-    },
-    {
-      id: 23,
-      title: 'React 16 Fundamentals',
-      description: 'Learn the fundamentals of React 16',
-      percentComplete: 78,
-      favorite: false
-    }
-  ];
-
+  courses = null;
   currentCourse = null;
 
-  constructor() {
+  constructor(private coursesService: CoursesService) {
     // TODO:
   }
 
   ngOnInit(): void {
     this.resetSelectCourse();
+    this.courses = this.coursesService.all();
   }
 
   cancel(): void {
@@ -51,12 +37,15 @@ export class CoursesComponent implements OnInit {
     console.log('course: ', course);
   }
 
-  saveCourse(): void {
-    console.log("form submitted:");
+  saveCourse(course): void {
+    if (course.id) {
+      this.coursesService.update(course);
+    } else {
+      this.coursesService.create(course);
+    }
   }
 
   deleteCourse(courseId): void {
-    console.log('courseId: ', courseId);
+    this.coursesService.delete(courseId);
   }
-
 }
