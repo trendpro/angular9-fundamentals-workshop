@@ -19,7 +19,7 @@ export class CoursesComponent implements OnInit {
       title: 'React 16 Fundamentals',
       description: 'Learn the fundamentals of React 16',
       percentComplete: 78,
-      favorite: true
+      favorite: false
     }
   ];
 
@@ -30,15 +30,33 @@ export class CoursesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // TODO:
+    this.resetSelectCourse();
   }
 
-  selectCourse(course) {
+  cancel(): void {
+    this.resetSelectCourse();
+  }
+
+  resetSelectCourse(): void {
+    this.currentCourse = {
+      title: '',
+      description: '',
+      percentComplete: 0,
+      favorite: false
+    };
+  }
+
+  selectCourse(course): void {
     this.currentCourse = course;
     console.log('course: ', course);
   }
 
-  deleteCourse(courseId) {
+  saveCourse(): void {
+    console.log("form submitted:");
+  }
+
+  deleteCourse(courseId): void {
     console.log('courseId: ', courseId);
   }
+
 }
