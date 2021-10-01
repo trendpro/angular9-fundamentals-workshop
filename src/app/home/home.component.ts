@@ -17,10 +17,15 @@ export class HomeComponent implements OnInit {
     { title: 'Angular Routing' },
     { title: 'Unit Testing Fundamentals' },
   ];
+  title = 'Hello Workshop!';
+  currentLesson = null;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  selectLesson(lesson) {
+    this.currentLesson = lesson;
+  }
 }
