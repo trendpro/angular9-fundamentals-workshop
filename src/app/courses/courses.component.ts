@@ -19,7 +19,7 @@ export class CoursesComponent implements OnInit {
     this.loadCourses();
   }
 
-  cancel(): void {
+  cancelCourse(): void {
     this.resetSelectCourse();
   }
 
