@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, Output, ngOnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-courses-details',
   templateUrl: './courses-details.component.html',
   styleUrls: ['./courses-details.component.scss']
 })
-export class CoursesDetailsComponent implements ngOnInit {
+export class CoursesDetailsComponent {
   selectedCourse;
   originalTitle;
 

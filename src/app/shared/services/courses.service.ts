@@ -17,7 +17,7 @@ export class CoursesService {
   }
 
   find(courseId) {
-    return this.http.get(this.getUrlById(course.id));
+    return this.http.get(this.getUrlById(courseId));
   }
 
   create(course) {
