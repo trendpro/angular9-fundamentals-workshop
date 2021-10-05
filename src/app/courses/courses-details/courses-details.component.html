@@ -1,0 +1,65 @@
+<mat-card>
+  <mat-card-header>
+      <mat-card-title>
+          <span *ngIf="selectedCourse.id; else noCourse">{{originalTitle}}</span>
+          <ng-template #noCourse>Select course</ng-template>
+      </mat-card-title>
+  </mat-card-header>
+  <form #form="ngForm" (submit)="save.emit(selectedCourse)">
+    <mat-card-content>
+    <mat-form-field>
+      <input 
+        matInput 
+        placeholder="Title" 
+        type="text" name="title"
+        required
+        [(ngModel)]="selectedCourse.title"
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput 
+        placeholder="Description" 
+        type="text" name="description"                  
+        [(ngModel)]="selectedCourse.description"
+      >
+    </mat-form-field>
+    <section>
+      <h4>Current course percent completed</h4>
+      <mat-slider
+        class="full-width"
+        min="0"
+        max="100"
+        name="percentComplete"
+        thumbLabel
+        [(ngModel)]="selectedCourse.percentComplete"
+      >
+      </mat-slider>
+    </section>
+    <section>
+      <mat-checkbox
+        name="favorite"
+        [(ngModel)]="selectedCourse.favorite"
+      >
+      </mat-checkbox>
+    </section>
+
+    </mat-card-content>
+    <mat-card-actions>
+    <button 
+      type="submit" 
+      mat-flat-button
+      color="primary"
+      [disabled]="form.invalid"
+    >
+      Submit
+    </button>
+    <button 
+      type="button" 
+      mat-button (click)="cancel.emit()"
+    >
+      Cancel
+    </button>
+    </mat-card-actions>
+  </form>
+</mat-card>

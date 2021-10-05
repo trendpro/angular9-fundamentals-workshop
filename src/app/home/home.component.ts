@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LessonsService } from '../shared/services/lessons.service';
 
 @Component({
   selector: 'app-home',
@@ -6,26 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  currentCourseId = 1;
-  courseLessons = {
-    1: [
-      { title: 'Hello Angular' },
-      { title: 'Component Fundamentals' },
-      { title: 'Template Driven Forms' },
-      { title: 'Angular Services' },
-      { title: 'Server Communication' },
-      { title: 'Component Driven Architecture' },
-      { title: 'Angular Routing' },
-      { title: 'Unit Testing Fundamentals' },
-    ]
-  };
+  title = 'Hello Workshop!';
+  currentLesson = null;
+  courseLessons = null;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private lessonsService: LessonsService) {
+    // TODO:
   }
 
-  getCourseLessons(courseId) {
-    return this.courseLessons[courseId];
+  ngOnInit(): void {
+    this.courseLessons = this.lessonsService.all();
+  }
+
+  selectLesson(lesson) {
+    this.currentLesson = lesson;
   }
 }

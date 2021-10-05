@@ -5,10 +5,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
 import { MaterialModule } from './material.module';
-import { AuthService } from './shared/services/auth.service';
-import { NotificationService } from './shared/services/notification.service';
+import { HomeComponent } from './home/home.component';
+import { CoursesComponent } from './courses/courses.component';
+import { FormsModule } from '@angular/forms';
+import { CoursesService } from './shared/services/courses.service';
+import { LessonsService } from './shared/services/lessons.service';
+import { CoursesListComponent } from './courses/courses-list/courses-list.component';
+import { CoursesDetailsComponent } from './courses/courses-details/courses-details.component';
+import { LessonsListComponent } from './lessons/lessons-list/lessons-list.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   imports: [
@@ -16,13 +22,19 @@ import { NotificationService } from './shared/services/notification.service';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule,
+    FormsModule,
+    HttpClientModule
   ],
-  declarations: [AppComponent, HomeComponent],
-  providers: [
-    AuthService,
-    NotificationService
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    CoursesComponent,
+    CoursesListComponent,
+    CoursesDetailsComponent,
+    LessonsListComponent,
+    UsersComponent
   ],
-  bootstrap: [AppComponent],
+  providers: [CoursesService, LessonsService],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

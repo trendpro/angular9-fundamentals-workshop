@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { shareReplay } from 'rxjs/operators';
-
-import { AuthService } from './shared/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,14 +10,13 @@ export class AppComponent {
   title = 'Angular 9 Fundamentals';
   links = [
     { path: '/home', icon: 'home', title: 'Home' },
+    { path: '/users', icon: 'person', title: 'Users' },
     { path: '/courses', icon: 'view_list', title: 'Courses' },
   ];
 
-  isAuthenticated$ = this.authService.isAuthenticated$.pipe(shareReplay(1));
-
-  constructor(private authService: AuthService) {}
+  constructor(private router: Router) { }
 
   logout() {
-    this.authService.logout();
+    this.router.navigateByUrl('/login');
   }
 }

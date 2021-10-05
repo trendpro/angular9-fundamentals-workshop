@@ -1,8 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-
-import { Course } from '../shared/interfaces/course.interface';
 import { CoursesService } from '../shared/services/courses.service';
 
 @Component({
@@ -11,60 +7,58 @@ import { CoursesService } from '../shared/services/courses.service';
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent implements OnInit {
-  courses$: Observable<Course[]>;
-  selectedCourse: Course;
+  courses = null;
+  currentCourse = null;
 
-  constructor(private coursesService: CoursesService) { }
+  constructor(private coursesService: CoursesService) {
+    // TODO:
+  }
 
   ngOnInit(): void {
-    this.loadCourses(true);
-    this.resetCourse();
+    this.resetSelectCourse();
+    this.loadCourses();
   }
 
-  selectCourse(course: Course) {
-    this.selectedCourse = course;
+  cancelCourse(): void {
+    this.resetSelectCourse();
   }
 
-  loadCourses(displayNotification: boolean) {
-    this.courses$ = this.coursesService.getAllCourses(displayNotification);
-  }
-
-  saveCourse(course: Course) {
-    if (course.id) {
-      this.updateCourse(course);
-    } else {
-      this.createCourse(course);
-    }
-    this.resetCourse();
-  }
-
-  updateCourse(course: Course) {
-    this.coursesService.updateCourse(course).pipe(
-      tap(() => this.loadCourses(false))
-    ).subscribe();
-  }
-
-  createCourse(course: Course) {
-    this.coursesService.createCourse(course).pipe(
-      tap(() => this.loadCourses(false))
-    ).subscribe();
-  }
-
-  deleteCourse(id: number) {
-    this.coursesService.deleteCourse(id).pipe(
-      tap(() => this.loadCourses(false))
-    ).subscribe();
-  }
-
-  resetCourse() {
-    const emptyCourse: Course = {
-      id: null,
+  resetSelectCourse(): void {
+    this.currentCourse = {
       title: '',
       description: '',
       percentComplete: 0,
       favorite: false
     };
+  }
 
-    this.selectCourse(emptyCourse);
+  selectCourse(course): void {
+    this.currentCourse = course;
+    console.log('course: ', course);
+  }
+
+  saveCourse(course): void {
+    if (course.id) {
+      this.coursesService.update(course)
+        .subscribe(result => this.refreshCourses());
+    } else {
+      this.coursesService.create(course)
+        .subscribe(result => this.refreshCourses());
+    }
+  }
+
+  deleteCourse(courseId): void {
+    this.coursesService.delete(courseId)
+      .subscribe(result => this.refreshCourses());
+  }
+
+  loadCourses() {
+    this.coursesService.all()
+      .subscribe(courses => this.courses = courses);
+  }
+
+  refreshCourses() {
+    this.resetSelectCourse();
+    this.loadCourses();
   }
 }

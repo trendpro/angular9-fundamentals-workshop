@@ -8,11 +8,26 @@
       "favorite": true
     },
     {
+<<<<<<< HEAD
       "id": 2,
       "title": "Software engineer",
       "description": "Test",
       "percentComplete": 77,
       "favorite": true
+=======
+      "title": "This is a test",
+      "description": "Technial Support as per our SLA",
+      "percentComplete": 27,
+      "favorite": true,
+      "id": 2
+    },
+    {
+      "title": "Demo",
+      "description": "Technial Support as per our SLA",
+      "percentComplete": 23,
+      "favorite": true,
+      "id": 4
+>>>>>>> 00-start
     }
   ]
 }

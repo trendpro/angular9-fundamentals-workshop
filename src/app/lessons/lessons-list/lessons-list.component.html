@@ -1,0 +1,15 @@
+<mat-card>
+  <mat-card-content>
+    <!-- comments -->
+    <mat-list dense>
+      <mat-list-item 
+        *ngFor="let lesson of lessons" 
+        (click)="selected.emit(lesson)"
+      >
+        {{lesson.title}}
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
+
+
